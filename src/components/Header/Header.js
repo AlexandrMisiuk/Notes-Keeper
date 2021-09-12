@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function HeaderWithSearch() {
+export default function Header() {
   const classes = useStyles();
 
   return (

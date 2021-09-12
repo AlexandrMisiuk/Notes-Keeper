@@ -24,12 +24,19 @@ const useStyles = makeStyles((theme) => ({
 
 const selectNewNote = (state) => state.newNote;
 
-export default function NewNoteForm() {
+export default function NewNoteForm({ isInputError, setIsInputError }) {
   const classes = useStyles();
 
   const dispatch = useDispatch();
   const newNote = useSelector(selectNewNote);
   // console.log("newNote =>", newNote);
+
+  function isOnlySpaces(text) {
+    const regExp = /^\s/;
+    const isOnlySpaces = regExp.test(text);
+    // console.log("isNotValid ==>", isNotValid);
+    return isOnlySpaces;
+  }
 
   return (
     <Box component="div" className={classes.form}>
@@ -38,12 +45,14 @@ export default function NewNoteForm() {
       </Typography>
       <TextField
         className={classes.textField}
+        error={isInputError}
         id="new-note-heading"
         label="Heading"
         placeholder="Enter heading"
         multiline
         value={newNote.heading}
         onChange={(e) => {
+          setIsInputError(isOnlySpaces(e.target.value));
           dispatch(changeHeading(e.target.value));
         }}
       />

@@ -28,12 +28,18 @@ const useStyles = makeStyles((theme) => ({
 
 const selectNewNote = (state) => state.newNote;
 
-export default function NewNotesBtnsGroup() {
+export default function NewNotesBtnsGroup({ isInputError }) {
   const classes = useStyles();
 
   const dispatch = useDispatch();
-  const newNote = useSelector(selectNewNote);
-  // console.log("newNote =>", newNote);
+  const { heading, text } = useSelector(selectNewNote);
+
+  function handleAddNote() {
+    if (!isInputError && heading) {
+      const lastEdit = new Date().toLocaleString();
+      dispatch(addNote({ heading, text, lastEdit, id: uuidv4() }));
+    }
+  }
 
   return (
     <Box component="div" className={classes.btnsGroup}>
@@ -52,13 +58,7 @@ export default function NewNotesBtnsGroup() {
           <PaletteIcon />
         </IconButton>
       </Tooltip>
-      <Button
-        className={classes.addNoteBtn}
-        onClick={() => {
-          const lastEdit = new Date().toLocaleString();
-          dispatch(addNote({ ...newNote, lastEdit, id: uuidv4() }));
-        }}
-      >
+      <Button className={classes.addNoteBtn} onClick={handleAddNote}>
         Add note
       </Button>
     </Box>
