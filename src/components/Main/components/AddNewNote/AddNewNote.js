@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import clsx from "clsx";
 
@@ -26,17 +26,25 @@ const useStyles = makeStyles((theme) => ({
 export default function NewNote() {
   const classes = useStyles();
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.up("sm"));
+
+  const [isInputError, setIsInputError] = useState(false);
 
   return (
     <Paper
       elevation={3}
       className={clsx(classes.newNote, {
-        [classes.mediaQuery]: matches
+        [classes.mediaQuery]: isTablet
       })}
     >
-      <NewNoteForm />
-      <NewNotesBtnsGroup />
+      <NewNoteForm
+        isInputError={isInputError}
+        setIsInputError={setIsInputError}
+      />
+      <NewNotesBtnsGroup
+        isInputError={isInputError}
+        setIsInputError={setIsInputError}
+      />
     </Paper>
   );
 }

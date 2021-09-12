@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Navbar() {
   const classes = useStyles();
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.up("sm"));
 
   const [view, setView] = React.useState("notes");
 
@@ -45,7 +45,7 @@ export default function Navbar() {
     >
       <ToggleButton value="notes" aria-label="notes" className={classes.button}>
         <CardMembershipIcon />
-        {matches && (
+        {isTablet && (
           <Typography
             className={classes.text}
             component="p"
@@ -58,7 +58,7 @@ export default function Navbar() {
       </ToggleButton>
       <ToggleButton value="archive" aria-label="archive">
         <ArchiveIcon />
-        {matches && (
+        {isTablet && (
           <Typography
             className={classes.text}
             component="p"

@@ -57,8 +57,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Note({ note }) {
   const classes = useStyles();
   const theme = useTheme();
-  const matchesSm = useMediaQuery(theme.breakpoints.up("sm"));
-  const matchesMd = useMediaQuery(theme.breakpoints.up("md"));
+  const isTablet = useMediaQuery(theme.breakpoints.up("sm"));
+  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
 
   const [expanded, setExpanded] = useState(false);
 
@@ -81,8 +81,8 @@ export default function Note({ note }) {
   return (
     <Card
       className={clsx(classes.note, {
-        [classes.mediaQuerySm]: matchesSm,
-        [classes.mediaQueryMd]: matchesMd
+        [classes.mediaQuerySm]: isTablet,
+        [classes.mediaQueryMd]: isDesktop
       })}
     >
       <CardHeader
