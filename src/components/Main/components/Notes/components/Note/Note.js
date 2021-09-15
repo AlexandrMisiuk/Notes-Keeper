@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
@@ -18,43 +17,12 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ArchiveIcon from "@material-ui/icons/Archive";
 import EditIcon from "@material-ui/icons/Edit";
 
-const useStyles = makeStyles((theme) => ({
-  note: {
-    width: "97%",
-    display: "inline-flex",
-    flexFlow: "column nowrap",
-    margin: "1.5%"
-  },
-  mediaQuerySm: {
-    width: "47%"
-  },
-  mediaQueryMd: {
-    width: "22%"
-  },
-  noteHeader: {
-    padding: theme.spacing(1),
-    paddingBottom: theme.spacing(0)
-  },
-  noteTitle: {
-    fontWeight: "bolder",
-    marginBottom: theme.spacing(1)
-  },
-  noteSubheader: {
-    fontSize: theme.typography.pxToRem(12)
-  },
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest
-    })
-  },
-  expandOpen: {
-    transform: "rotate(180deg)"
-  }
-}));
+import useStyles from "./styles";
+import { noteBackgroundColor } from "../../../AddNewNote/styles";
 
 export default function Note({ note }) {
+  const { heading, text, noteColor, lastEdit } = note;
+
   const classes = useStyles();
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.up("sm"));
@@ -68,13 +36,13 @@ export default function Note({ note }) {
 
   const title = (
     <Typography component="h4" className={classes.noteTitle}>
-      {note.heading}
+      {heading}
     </Typography>
   );
 
   const subheader = (
     <Typography component="p" className={classes.noteSubheader}>
-      Last edit: {note.lastEdit}
+      Last edit: {lastEdit}
     </Typography>
   );
 
@@ -82,7 +50,8 @@ export default function Note({ note }) {
     <Card
       className={clsx(classes.note, {
         [classes.mediaQuerySm]: isTablet,
-        [classes.mediaQueryMd]: isDesktop
+        [classes.mediaQueryMd]: isDesktop,
+        ...noteBackgroundColor(classes, noteColor)
       })}
     >
       <CardHeader
@@ -91,7 +60,7 @@ export default function Note({ note }) {
         className={classes.noteHeader}
       />
 
-      <CardActions disableSpacing>
+      <CardActions disableSpacing className={classes.actions}>
         <Tooltip title="Add to archive">
           <IconButton aria-label="add-to-archive">
             <ArchiveIcon />
@@ -115,7 +84,7 @@ export default function Note({ note }) {
       </CardActions>
       <Collapse in={expanded} timeout="auto">
         <CardContent>
-          <Typography component="p">{note.text}</Typography>
+          <Typography component="p">{text}</Typography>
         </CardContent>
       </Collapse>
     </Card>

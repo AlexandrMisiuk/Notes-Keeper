@@ -2,29 +2,19 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
-import { addNote } from "../../../../../features/notesSlice";
-
-import { makeStyles } from "@material-ui/core/styles";
+import { addNote } from "../../../../../../features/notesSlice";
+import { resetNewNote } from "../../../../../../features/newNoteSlice";
 
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import AddAlertIcon from "@material-ui/icons/AddAlert";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
-import PaletteIcon from "@material-ui/icons/Palette";
+
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
+import ColorBtn from "./components/ColorBtn";
 
-const useStyles = makeStyles((theme) => ({
-  btnsGroup: {
-    display: "flex",
-    flexFlow: "row nowrap"
-  },
-  addNoteBtn: {
-    fontSize: theme.typography.pxToRem(18),
-    textTransform: "none",
-    marginLeft: "auto"
-  }
-}));
+import useStyles from "./styles";
 
 const selectNewNote = (state) => state.newNote;
 
@@ -32,12 +22,20 @@ export default function NewNotesBtnsGroup({ isInputError }) {
   const classes = useStyles();
 
   const dispatch = useDispatch();
-  const { heading, text } = useSelector(selectNewNote);
+
+  const newNote = useSelector(selectNewNote);
+  console.log("NewNote", newNote);
 
   function handleAddNote() {
-    if (!isInputError && heading) {
+    const isHeadingNotEmpty = !!newNote.heading;
+
+    if (!isInputError && isHeadingNotEmpty) {
       const lastEdit = new Date().toLocaleString();
-      dispatch(addNote({ heading, text, lastEdit, id: uuidv4() }));
+      const note = { ...newNote, lastEdit, id: uuidv4() };
+
+      dispatch(addNote(note));
+
+      dispatch(resetNewNote());
     }
   }
 
@@ -53,11 +51,7 @@ export default function NewNotesBtnsGroup({ isInputError }) {
           <AssignmentTurnedInIcon />
         </IconButton>
       </Tooltip>
-      <Tooltip title="Change color">
-        <IconButton aria-label="change-color">
-          <PaletteIcon />
-        </IconButton>
-      </Tooltip>
+      <ColorBtn />
       <Button className={classes.addNoteBtn} onClick={handleAddNote}>
         Add note
       </Button>

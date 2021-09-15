@@ -1,7 +1,5 @@
 import React from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
-
 import { Box, Container, Grid } from "@material-ui/core";
 
 import Header from "./components/Header";
@@ -11,12 +9,7 @@ import Navbar from "./components/Navbar";
 import { Provider } from "react-redux";
 import store from "./store";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    fontFamily: theme.typography.fontFamily
-  }
-}));
+import useStyles from "./styles";
 
 export default function App() {
   const classes = useStyles();

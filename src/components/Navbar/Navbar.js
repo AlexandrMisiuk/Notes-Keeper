@@ -6,23 +6,10 @@ import CardMembershipIcon from "@material-ui/icons/CardMembership";
 import ArchiveIcon from "@material-ui/icons/Archive";
 import { Typography } from "@material-ui/core";
 
-import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-const useStyles = makeStyles((theme) => ({
-  navbar: {
-    marginTop: theme.spacing(2)
-  },
-  button: {
-    justifyContent: "flex-start"
-  },
-  text: {
-    textTransform: "none",
-    marginLeft: theme.spacing(1),
-    fontSize: theme.typography.pxToRem(18)
-  }
-}));
+import useStyles from "./styles";
 
 export default function Navbar() {
   const classes = useStyles();
