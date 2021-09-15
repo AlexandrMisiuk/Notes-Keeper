@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   heading: "",
-  text: ""
+  text: "",
+  noteColor: ""
 };
 
 export const newNoteSlice = createSlice({
@@ -14,11 +15,24 @@ export const newNoteSlice = createSlice({
     },
     changeText: (state, action) => {
       state.text = action.payload;
+    },
+    changeNoteColor: (state, action) => {
+      state.noteColor = action.payload;
+    },
+    resetNewNote: (state) => {
+      state.heading = "";
+      state.text = "";
+      state.noteColor = "";
     }
   }
 });
 
 // Action creators are generated for each case reducer function
-export const { changeHeading, changeText } = newNoteSlice.actions;
+export const {
+  changeHeading,
+  changeText,
+  changeNoteColor,
+  resetNewNote
+} = newNoteSlice.actions;
 
 export default newNoteSlice.reducer;

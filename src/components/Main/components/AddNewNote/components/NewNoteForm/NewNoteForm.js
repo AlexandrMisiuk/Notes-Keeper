@@ -4,23 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   changeHeading,
   changeText
-} from "../../../../../features/newNoteSlice";
+} from "../../../../../../features/newNoteSlice";
 
 import Box from "@material-ui/core/Box";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme) => ({
-  form: {
-    display: "flex",
-    flexFlow: "column nowrap"
-  },
-  textField: {
-    marginBottom: theme.spacing(1)
-  }
-}));
+import useStyles from "./styles";
 
 const selectNewNote = (state) => state.newNote;
 
