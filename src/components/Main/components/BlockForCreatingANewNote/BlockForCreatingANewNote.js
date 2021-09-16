@@ -8,13 +8,13 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import Paper from "@material-ui/core/Paper";
 import NewNoteForm from "./components/NewNoteForm";
-import NewNotesBtnsGroup from "./components/NewNotesBtnsGroup";
+import NewNoteBtnsGroup from "./components/NewNoteBtnsGroup";
 
 import { useStyles, noteBackgroundColor } from "./styles";
 
 const selectNewNote = (state) => state.newNote;
 
-export default function NewNote() {
+export default function BlockForCreatingANewNote() {
   const classes = useStyles();
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.up("sm"));
@@ -34,10 +34,7 @@ export default function NewNote() {
         isInputError={isInputError}
         setIsInputError={setIsInputError}
       />
-      <NewNotesBtnsGroup
-        isInputError={isInputError}
-        setIsInputError={setIsInputError}
-      />
+      <NewNoteBtnsGroup isInputError={isInputError} />
     </Paper>
   );
 }
