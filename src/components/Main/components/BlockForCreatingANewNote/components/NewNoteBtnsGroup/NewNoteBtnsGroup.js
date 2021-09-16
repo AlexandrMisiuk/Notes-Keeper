@@ -18,13 +18,13 @@ import useStyles from "./styles";
 
 const selectNewNote = (state) => state.newNote;
 
-export default function NewNotesBtnsGroup({ isInputError }) {
+export default function NewNoteBtnsGroup({ isInputError }) {
   const classes = useStyles();
 
   const dispatch = useDispatch();
 
   const newNote = useSelector(selectNewNote);
-  console.log("NewNote", newNote);
+  // console.log("NewNote", newNote);
 
   function handleAddNote() {
     const isHeadingNotEmpty = !!newNote.heading;
