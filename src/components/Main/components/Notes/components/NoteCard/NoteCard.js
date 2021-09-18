@@ -11,10 +11,12 @@ import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import useStyles from "./styles";
 import { noteBackgroundColor } from "../../../BlockForCreatingANewNote/styles";
+import NoteCardEditDialog from "./components/NoteCardEditDialog/NoteCardEditDialog";
 
 export default function NoteCard({ note }) {
   const { text, noteColor } = note;
 
+  const [openEditModal, setOpenEditModal] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
   const classes = useStyles();
@@ -29,14 +31,22 @@ export default function NoteCard({ note }) {
   });
 
   return (
-    <Card className={NoteCardClassName}>
-      <NoteCardHeader note={note} />
-      <NoteCardActions
-        expanded={expanded}
-        setExpanded={setExpanded}
+    <>
+      <Card className={NoteCardClassName}>
+        <NoteCardHeader note={note} />
+        <NoteCardActions
+          expanded={expanded}
+          setExpanded={setExpanded}
+          note={note}
+          setOpenEditModal={setOpenEditModal}
+        />
+        <NoteCardContent expanded={expanded} text={text} />
+      </Card>
+      <NoteCardEditDialog
         note={note}
+        open={openEditModal}
+        setOpen={setOpenEditModal}
       />
-      <NoteCardContent expanded={expanded} text={text} />
-    </Card>
+    </>
   );
 }

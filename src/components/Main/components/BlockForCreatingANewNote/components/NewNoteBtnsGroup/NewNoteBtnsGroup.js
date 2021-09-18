@@ -3,7 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
 import { addNote } from "../../../../../../features/notesSlice";
-import { resetNewNote } from "../../../../../../features/newNoteSlice";
+import {
+  resetNewNote,
+  changeNoteColor
+} from "../../../../../../features/newNoteSlice";
 
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
@@ -39,6 +42,10 @@ export default function NewNoteBtnsGroup({ isInputError }) {
     }
   }
 
+  const handleChoseColor = (color) => {
+    dispatch(changeNoteColor(color));
+  };
+
   return (
     <Box component="div" className={classes.btnsGroup}>
       <Tooltip title="Add alert">
@@ -51,7 +58,7 @@ export default function NewNoteBtnsGroup({ isInputError }) {
           <AssignmentTurnedInIcon />
         </IconButton>
       </Tooltip>
-      <ColorBtn />
+      <ColorBtn handleChoseColor={handleChoseColor} />
       <Button className={classes.addNoteBtn} onClick={handleAddNote}>
         Add note
       </Button>
