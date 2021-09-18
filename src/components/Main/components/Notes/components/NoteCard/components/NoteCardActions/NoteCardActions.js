@@ -18,10 +18,15 @@ import EditIcon from "@material-ui/icons/Edit";
 
 import useStyles from "./styles";
 
-export default function NoteCardActions({ expanded, setExpanded, note }) {
+export default function NoteCardActions(props) {
+  const { expanded, setExpanded, note, setOpenEditModal } = props;
   const classes = useStyles();
 
   const dispatch = useDispatch();
+
+  const handleClickOpen = () => {
+    setOpenEditModal(true);
+  };
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -40,7 +45,7 @@ export default function NoteCardActions({ expanded, setExpanded, note }) {
         </IconButton>
       </Tooltip>
       <Tooltip title="Edit">
-        <IconButton aria-label="edit">
+        <IconButton aria-label="edit" onClick={handleClickOpen}>
           <EditIcon />
         </IconButton>
       </Tooltip>
