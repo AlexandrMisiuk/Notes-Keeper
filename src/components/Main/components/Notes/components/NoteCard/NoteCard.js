@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 
-import clsx from "clsx";
-
 import Card from "@material-ui/core/Card";
+
+import clsx from "clsx";
+import { useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+
 import NoteCardHeader from "./components/NoteCardHeader/NoteCardHeader";
 import NoteCardActions from "./components/NoteCardActions/NoteCardActions";
 import NoteCardContent from "./components/NoteCardContent/NoteCardContent";
+import NoteCardEditDialog from "./components/NoteCardEditDialog/NoteCardEditDialog";
 
-import { useTheme } from "@material-ui/core/styles";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import useStyles from "./styles";
 import { noteBackgroundColor } from "../../../BlockForCreatingANewNote/styles";
-import NoteCardEditDialog from "./components/NoteCardEditDialog/NoteCardEditDialog";
 
 export default function NoteCard({ note }) {
   const { text, noteColor } = note;

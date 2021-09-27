@@ -1,10 +1,10 @@
 import React from "react";
 
-import useStyles from "./styles";
-
 import CardContent from "@material-ui/core/CardContent";
 import Collapse from "@material-ui/core/Collapse";
 import Typography from "@material-ui/core/Typography";
+
+import useStyles from "./styles";
 
 export default function NoteCardContent({ expanded, text }) {
   const classes = useStyles();

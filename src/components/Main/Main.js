@@ -1,8 +1,9 @@
 import React from "react";
 
+import { Box } from "@material-ui/core";
+
 import BlockForCreatingANewNote from "./components/BlockForCreatingANewNote";
 import Notes from "./components/Notes";
-import { Box } from "@material-ui/core";
 
 import useStyles from "./styles";
 

@@ -2,12 +2,6 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
-import { addNote } from "../../../../../../features/notesSlice";
-import {
-  resetNewNote,
-  changeNoteColor
-} from "../../../../../../features/newNoteSlice";
-
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import AddAlertIcon from "@material-ui/icons/AddAlert";
@@ -15,6 +9,13 @@ import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
+
+import { addNote } from "../../../../../../features/notesSlice";
+import {
+  resetNewNote,
+  changeNoteColor
+} from "../../../../../../features/newNoteSlice";
+
 import ColorBtn from "./components/ColorBtn";
 
 import useStyles from "./styles";

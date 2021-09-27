@@ -1,14 +1,15 @@
 import React from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import {
-  changeHeading,
-  changeText
-} from "../../../../../../features/newNoteSlice";
 
 import Box from "@material-ui/core/Box";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+
+import {
+  changeHeading,
+  changeText
+} from "../../../../../../features/newNoteSlice";
 
 import useStyles from "./styles";
 

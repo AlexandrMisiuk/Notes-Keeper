@@ -1,18 +1,18 @@
 import React from "react";
 
-import MuiDialogContent from "@material-ui/core/DialogContent";
 import TextField from "@material-ui/core/TextField";
 
 import useStyles from "./styles";
 
-export default function EditDialogForm(props) {
+export default function NotesEditorForm(props) {
   const {
     isInputError,
     setIsInputError,
     currentHeading,
     setCurrentHeading,
     currentText,
-    setCurrentText
+    setCurrentText,
+    textFieldId
   } = props;
 
   const classes = useStyles();
@@ -26,11 +26,11 @@ export default function EditDialogForm(props) {
   }
 
   return (
-    <MuiDialogContent className={classes.root}>
+    <>
       <TextField
         className={classes.textField}
         error={isInputError}
-        id="edit-note-heading"
+        id={`${textFieldId}-note-heading`}
         label="Heading"
         placeholder="Enter heading"
         multiline
@@ -42,7 +42,7 @@ export default function EditDialogForm(props) {
       />
       <TextField
         className={classes.textField}
-        id="edit-note-note"
+        id={`${textFieldId}-note-note`}
         label="Note"
         placeholder="Note..."
         multiline
@@ -51,6 +51,6 @@ export default function EditDialogForm(props) {
           setCurrentText(e.target.value);
         }}
       />
-    </MuiDialogContent>
+    </>
   );
 }

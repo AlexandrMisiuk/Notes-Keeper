@@ -1,12 +1,12 @@
 import React from "react";
 
 import { Box, Container, Grid } from "@material-ui/core";
+import { Provider } from "react-redux";
 
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Navbar from "./components/Navbar";
 
-import { Provider } from "react-redux";
 import store from "./store";
 
 import useStyles from "./styles";

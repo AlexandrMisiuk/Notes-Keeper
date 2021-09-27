@@ -8,8 +8,23 @@ export const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
     marginBottom: theme.spacing(2)
   },
+  editNote: {
+    width: "70vw",
+    display: "flex",
+    flexFlow: "column nowrap",
+    padding: theme.spacing(1)
+  },
   mediaQuery: {
     maxWidth: "500px"
+  },
+  form: {
+    display: "flex",
+    flexFlow: "column nowrap"
+  },
+  dialogForm: {
+    display: "flex",
+    flexFlow: "column nowrap",
+    padding: theme.spacing(1)
   },
   backgroundColorRed: {
     backgroundColor: theme.palette.error.light
