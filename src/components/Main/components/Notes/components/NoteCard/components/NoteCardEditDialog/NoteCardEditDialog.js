@@ -1,22 +1,24 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
+import { Box } from "@material-ui/core";
+import Dialog from "@material-ui/core/Dialog";
+
+import clsx from "clsx";
+import { useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+
+import EditDialogTitle from "./components/EditDialogTitle";
+import EditDialogForm from "./components/EditDialogForm";
+import EditDialogActions from "./components/EditDialogActions";
+
 import {
   addNote,
   removeFromActualNotes
 } from "../../../../../../../../features/notesSlice";
 
-import clsx from "clsx";
-
-import { Box } from "@material-ui/core";
-import Dialog from "@material-ui/core/Dialog";
-import EditDialogTitle from "./components/EditDialogTitle";
-import EditDialogForm from "./components/EditDialogForm";
-import EditDialogActions from "./components/EditDialogActions";
-
 import useStyles from "./styles";
-import { useTheme } from "@material-ui/core/styles";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+
 import { noteBackgroundColor } from "../../../../../BlockForCreatingANewNote/styles";
 
 export default function NoteCardEditDialog({ open, setOpen, note }) {
@@ -41,6 +43,7 @@ export default function NoteCardEditDialog({ open, setOpen, note }) {
   function handleSaveChanges() {
     const isHeadingNotEmpty = !!currentHeading;
 
+    //use early return
     if (!isInputError && isHeadingNotEmpty) {
       const note = {
         heading: currentHeading,

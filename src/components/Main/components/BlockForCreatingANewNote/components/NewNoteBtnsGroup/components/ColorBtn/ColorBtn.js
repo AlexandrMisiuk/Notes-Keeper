@@ -17,6 +17,8 @@ export default function ColorBtn({ handleChoseColor }) {
     setAnchorEl(null);
   };
 
+  const colors = ["", "Red", "Green", "Blue"];
+
   return (
     <>
       <Tooltip title="Change color">
@@ -36,38 +38,16 @@ export default function ColorBtn({ handleChoseColor }) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem
-          onClick={() => {
-            handleChoseColor("");
-            setAnchorEl(null);
-          }}
-        >
-          Default
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            handleChoseColor("red");
-            setAnchorEl(null);
-          }}
-        >
-          Red
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            handleChoseColor("green");
-            setAnchorEl(null);
-          }}
-        >
-          Green
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            handleChoseColor("blue");
-            setAnchorEl(null);
-          }}
-        >
-          Blue
-        </MenuItem>
+        {colors.map((color) => (
+          <MenuItem
+            onClick={() => {
+              handleChoseColor(color);
+              setAnchorEl(null);
+            }}
+          >
+            {color || "Default"}
+          </MenuItem>
+        ))}
       </Menu>
     </>
   );

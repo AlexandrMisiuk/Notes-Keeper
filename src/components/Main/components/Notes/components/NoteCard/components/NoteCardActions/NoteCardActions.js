@@ -2,11 +2,6 @@ import React from "react";
 
 import { useDispatch } from "react-redux";
 
-import {
-  moveToArchivedNotes,
-  removeFromActualNotes
-} from "../../../../../../../../features/notesSlice";
-
 import clsx from "clsx";
 
 import CardActions from "@material-ui/core/CardActions";
@@ -15,6 +10,11 @@ import IconButton from "@material-ui/core/IconButton";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ArchiveIcon from "@material-ui/icons/Archive";
 import EditIcon from "@material-ui/icons/Edit";
+
+import {
+  moveToArchivedNotes,
+  removeFromActualNotes
+} from "../../../../../../../../features/notesSlice";
 
 import useStyles from "./styles";
 

@@ -4,9 +4,9 @@ import MuiDialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import AddAlertIcon from "@material-ui/icons/AddAlert";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
-
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
+
 import ColorBtn from "../../../../../../../BlockForCreatingANewNote/components/NewNoteBtnsGroup/components/ColorBtn";
 
 import useStyles from "./styles";

@@ -1,24 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-let notesFromLocalStorage;
+const getInitialStateFromLocalStorage = () => {
+  let notesFromLocalStorage;
 
-try {
-  const key = "notes";
-  const notesFromLocalStorageJSON = localStorage.getItem(key);
-  notesFromLocalStorage = JSON.parse(notesFromLocalStorageJSON);
-} catch (error) {
-  console.error("Error, when to try getItem from local storage!!\n", error);
-  notesFromLocalStorage = null;
-}
+  try {
+    const key = "notes";
+    const notesFromLocalStorageJSON = localStorage.getItem(key);
+    notesFromLocalStorage = JSON.parse(notesFromLocalStorageJSON);
+  } catch (error) {
+    console.error("Error, when to try getItem from local storage!!\n", error);
+    notesFromLocalStorage = null;
+  }
 
-const initialState = notesFromLocalStorage ?? {
-  actualNotes: [],
-  archivedNotes: []
+  const initialState = notesFromLocalStorage ?? {
+    actualNotes: [],
+    archivedNotes: []
+  };
+
+  return initialState;
 };
 
 export const notesSlice = createSlice({
   name: "notes",
-  initialState,
+  initialState: getInitialStateFromLocalStorage(),
   reducers: {
     addNote: (state, action) => {
       state.actualNotes.unshift(action.payload);

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-import clsx from "clsx";
+import Paper from "@material-ui/core/Paper";
 
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import clsx from "clsx";
 
-import Paper from "@material-ui/core/Paper";
 import NewNoteForm from "./components/NewNoteForm";
 import NewNoteBtnsGroup from "./components/NewNoteBtnsGroup";
 
