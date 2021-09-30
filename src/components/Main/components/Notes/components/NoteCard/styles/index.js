@@ -1,3 +1,3 @@
-import { useStyles } from "./styles";
+import { useStyles, noteBackgroundColor } from "./styles";
 
-export default useStyles;
+export { useStyles, noteBackgroundColor };

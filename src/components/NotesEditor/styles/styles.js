@@ -26,6 +26,15 @@ export const useStyles = makeStyles((theme) => ({
     flexFlow: "column nowrap",
     padding: theme.spacing(1)
   },
+  btnsGroup: {
+    display: "flex",
+    flexFlow: "row nowrap"
+  },
+  dialogBtnsGroup: {
+    display: "flex",
+    flexFlow: "row nowrap",
+    justifyContent: "flex-start"
+  },
   backgroundColorRed: {
     backgroundColor: theme.palette.error.light
   },

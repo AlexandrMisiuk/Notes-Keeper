@@ -9,10 +9,9 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import NoteCardHeader from "./components/NoteCardHeader/NoteCardHeader";
 import NoteCardActions from "./components/NoteCardActions/NoteCardActions";
 import NoteCardContent from "./components/NoteCardContent/NoteCardContent";
-import NoteCardEditDialog from "./components/NoteCardEditDialog/NoteCardEditDialog";
+import NotesEditor from "../../../../../NotesEditor";
 
-import useStyles from "./styles";
-import { noteBackgroundColor } from "../../../BlockForCreatingANewNote/styles";
+import { useStyles, noteBackgroundColor } from "./styles";
 
 export default function NoteCard({ note }) {
   const { text, noteColor } = note;
@@ -43,10 +42,11 @@ export default function NoteCard({ note }) {
         />
         <NoteCardContent expanded={expanded} text={text} />
       </Card>
-      <NoteCardEditDialog
+      <NotesEditor
         note={note}
         open={openEditModal}
         setOpen={setOpenEditModal}
+        isNewNote={false}
       />
     </>
   );
