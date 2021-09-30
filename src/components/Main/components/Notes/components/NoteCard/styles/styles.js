@@ -23,3 +23,20 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.info.light
   }
 }));
+
+export const noteBackgroundColor = (classes, color) => {
+  switch (color) {
+    case "Red": {
+      return { [classes.backgroundColorRed]: true };
+    }
+    case "Green": {
+      return { [classes.backgroundColorGreen]: true };
+    }
+    case "Blue": {
+      return { [classes.backgroundColorBlue]: true };
+    }
+    default: {
+      return {};
+    }
+  }
+};
