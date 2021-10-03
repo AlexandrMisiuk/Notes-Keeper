@@ -11,9 +11,9 @@ import ColorBtn from "./components/ColorBtn";
 import useStyles from "./styles";
 
 export default function NotesEditorBtnsGroup({
-  handleAction,
+  handleSafeNote,
   handleChoseColor,
-  isNewNote
+  isNewNote,
 }) {
   const classes = useStyles();
 
@@ -35,7 +35,7 @@ export default function NotesEditorBtnsGroup({
       <Button
         className={classes.saveChangesBtn}
         autoFocus
-        onClick={handleAction}
+        onClick={handleSafeNote}
       >
         {btnText}
       </Button>
