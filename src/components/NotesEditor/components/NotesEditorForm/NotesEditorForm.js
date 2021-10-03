@@ -12,18 +12,10 @@ export default function NotesEditorForm(props) {
     setCurrentHeading,
     currentText,
     setCurrentText,
-    textFieldId
+    textFieldId,
   } = props;
 
   const classes = useStyles();
-
-  function isOnlySpaces(text) {
-    //use trim string
-    const regExp = /^\s/;
-    const isOnlySpaces = regExp.test(text);
-
-    return isOnlySpaces;
-  }
 
   return (
     <>
@@ -36,9 +28,10 @@ export default function NotesEditorForm(props) {
         multiline
         value={currentHeading}
         onChange={(e) => {
-          setIsInputError(isOnlySpaces(e.target.value));
+          setIsInputError(false);
           setCurrentHeading(e.target.value);
         }}
+        onBlur={() => setIsInputError(false)}
       />
       <TextField
         className={classes.textField}

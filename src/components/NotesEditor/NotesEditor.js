@@ -39,12 +39,12 @@ export default function NotesEditor(props) {
 
   const paperClassName = clsx(classes.newNote, {
     [classes.mediaQuery]: isTablet,
-    ...noteBackgroundColor(classes, currentNoteColor)
+    ...noteBackgroundColor(classes, currentNoteColor),
   });
 
   const boxClassName = clsx(classes.editNote, {
     [classes.mediaQuery]: isTablet,
-    ...noteBackgroundColor(classes, currentNoteColor)
+    ...noteBackgroundColor(classes, currentNoteColor),
   });
 
   const handleClose = () => {
@@ -54,46 +54,44 @@ export default function NotesEditor(props) {
     setCurrentNoteColor(noteColor);
   };
 
-  function handleSaveChanges() {
-    const isHeadingNotEmpty = !!currentHeading;
-
-    //use early return
-    if (!isInputError && isHeadingNotEmpty) {
-      const note = {
-        heading: currentHeading,
-        text: currentText,
-        noteColor: currentNoteColor,
-        lastEdit: new Date().toLocaleString(),
-        id
-      };
-
-      dispatch(removeFromActualNotes(note));
-      dispatch(addNote(note));
-      setOpen(false);
-    }
-  }
-
   const handleChoseColor = (color) => {
     setCurrentNoteColor(color);
   };
 
-  function handleAddNote() {
-    const isHeadingNotEmpty = !!currentHeading;
+  function handleSafeNote() {
+    const isHeadingEmpty = !currentHeading.trim();
 
-    if (!isInputError && isHeadingNotEmpty) {
-      const note = {
-        heading: currentHeading,
-        text: currentText,
-        noteColor: currentNoteColor,
-        lastEdit: new Date().toLocaleString(),
-        id: uuidv4()
-      };
+    if (isHeadingEmpty) {
+      setIsInputError(true);
+      return;
+    }
 
+    const note = {
+      heading: currentHeading.trim(),
+      text: currentText.trim(),
+      noteColor: currentNoteColor,
+      lastEdit: new Date().toLocaleString(),
+      id: isNewNote ? uuidv4() : id,
+    };
+
+    if (isNewNote) {
       dispatch(addNote(note));
 
       setCurrentHeading("");
       setCurrentText("");
       setCurrentNoteColor("");
+
+      setIsInputError(false);
+    } else {
+      dispatch(removeFromActualNotes(note));
+      dispatch(addNote(note));
+
+      setCurrentHeading(note.heading);
+      setCurrentText(note.text);
+      setCurrentNoteColor(note.noteColor);
+
+      setOpen(false);
+      setIsInputError(false);
     }
   }
 
@@ -115,7 +113,7 @@ export default function NotesEditor(props) {
       </Box>
       <Box component="div" className={classes.btnsGroup}>
         <NotesEditorBtnsGroup
-          handleAction={handleAddNote}
+          handleSafeNote={handleSafeNote}
           handleChoseColor={handleChoseColor}
           isNewNote={isNewNote}
         />
@@ -140,7 +138,7 @@ export default function NotesEditor(props) {
         </MuiDialogContent>
         <MuiDialogActions className={classes.dialogBtnsGroup}>
           <NotesEditorBtnsGroup
-            handleAction={handleSaveChanges}
+            handleSafeNote={handleSafeNote}
             handleChoseColor={handleChoseColor}
             isNewNote={isNewNote}
           />
