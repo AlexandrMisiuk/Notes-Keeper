@@ -1,5 +1,7 @@
 import React from "react";
 
+import { useHistory } from "react-router-dom";
+
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import CardMembershipIcon from "@material-ui/icons/CardMembership";
@@ -12,11 +14,13 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import useStyles from "./styles";
 
 export default function Navbar() {
+  const history = useHistory();
+
   const classes = useStyles();
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.up("sm"));
 
-  const [view, setView] = React.useState("notes");
+  const [view, setView] = React.useState("actual");
 
   const handleChange = (event, nextView) => {
     setView(nextView);
@@ -30,7 +34,12 @@ export default function Navbar() {
       onChange={handleChange}
       className={classes.navbar}
     >
-      <ToggleButton value="notes" aria-label="notes" className={classes.button}>
+      <ToggleButton
+        value="actual"
+        aria-label="actual"
+        className={classes.button}
+        onClick={() => history.push("/")}
+      >
         <CardMembershipIcon />
         {isTablet && (
           <Typography
@@ -43,7 +52,11 @@ export default function Navbar() {
           </Typography>
         )}
       </ToggleButton>
-      <ToggleButton value="archive" aria-label="archive">
+      <ToggleButton
+        value="archive"
+        aria-label="archive"
+        onClick={() => history.push("/archived-notes")}
+      >
         <ArchiveIcon />
         {isTablet && (
           <Typography

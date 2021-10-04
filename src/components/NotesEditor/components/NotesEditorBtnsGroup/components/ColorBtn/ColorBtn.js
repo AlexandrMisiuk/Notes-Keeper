@@ -38,8 +38,9 @@ export default function ColorBtn({ handleChoseColor }) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {colors.map((color) => (
+        {colors.map((color, index) => (
           <MenuItem
+            key={index + 1}
             onClick={() => {
               handleChoseColor(color);
               setAnchorEl(null);

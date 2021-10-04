@@ -1,4 +1,5 @@
 import React from "react";
+import { Route } from "react-router-dom";
 
 import { Box } from "@material-ui/core";
 
@@ -11,9 +12,18 @@ export default function Main() {
   const classes = useStyles();
 
   return (
-    <Box component="main" className={classes.main}>
-      <NotesEditor isNewNote={true} />
-      <Notes />
-    </Box>
+    <>
+      <Route exact path="/">
+        <Box component="main" className={classes.main}>
+          <NotesEditor isNewNote={true} />
+          <Notes />
+        </Box>
+      </Route>
+      <Route exact path="/archived-notes">
+        <Box component="main" className={classes.main}>
+          <div>archived-notes</div>
+        </Box>
+      </Route>
+    </>
   );
 }
