@@ -14,7 +14,7 @@ const getInitialStateFromLocalStorage = () => {
 
   const initialState = notesFromLocalStorage ?? {
     actualNotes: [],
-    archivedNotes: []
+    archivedNotes: [],
   };
 
   return initialState;
@@ -36,15 +36,23 @@ export const notesSlice = createSlice({
     },
     moveToArchivedNotes: (state, action) => {
       state.archivedNotes.unshift(action.payload);
-    }
-  }
+    },
+    removeFromArchivedNotes: (state, action) => {
+      const filtredArchivedNotes = state.archivedNotes.filter(
+        (note) => note.id !== action.payload.id
+      );
+      // console.log(filtredActualNotes);
+      state.archivedNotes = [...filtredArchivedNotes];
+    },
+  },
 });
 
 // Action creators are generated for each case reducer function
 export const {
   addNote,
   moveToArchivedNotes,
-  removeFromActualNotes
+  removeFromActualNotes,
+  removeFromArchivedNotes,
 } = notesSlice.actions;
 
 export default notesSlice.reducer;

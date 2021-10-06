@@ -15,12 +15,21 @@ import useStyles from "./styles";
 
 export default function Navbar() {
   const history = useHistory();
+  // console.log(history);
 
   const classes = useStyles();
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.up("sm"));
 
-  const [view, setView] = React.useState("actual");
+  const initialView = () => {
+    const path = history.location.pathname;
+    // console.log(path.search("archived"));
+    if (path.search("archived") !== -1) return "archive";
+
+    return "actual";
+  };
+
+  const [view, setView] = React.useState(initialView);
 
   const handleChange = (event, nextView) => {
     setView(nextView);
