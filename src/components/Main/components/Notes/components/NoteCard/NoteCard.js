@@ -13,7 +13,8 @@ import NotesEditor from "../../../../../NotesEditor";
 
 import { useStyles, noteBackgroundColor } from "./styles";
 
-export default function NoteCard({ note }) {
+export default function NoteCard({ note, isArchived }) {
+  // console.log("isArchived", isArchived);
   const { text, noteColor } = note;
 
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -27,7 +28,7 @@ export default function NoteCard({ note }) {
   const NoteCardClassName = clsx(classes.noteCard, {
     [classes.mediaQuerySm]: isTablet,
     [classes.mediaQueryMd]: isDesktop,
-    ...noteBackgroundColor(classes, noteColor)
+    ...noteBackgroundColor(classes, noteColor),
   });
 
   return (
@@ -35,6 +36,7 @@ export default function NoteCard({ note }) {
       <Card className={NoteCardClassName}>
         <NoteCardHeader note={note} />
         <NoteCardActions
+          isArchived={isArchived}
           expanded={expanded}
           setExpanded={setExpanded}
           note={note}

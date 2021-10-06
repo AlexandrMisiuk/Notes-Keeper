@@ -10,11 +10,11 @@ import useStyles from "./styles";
 
 const selectActualNotes = (state) => state.notes;
 
-export default function Notes() {
+export default function Notes({ isArchived }) {
   const classes = useStyles();
 
   const notes = useSelector(selectActualNotes);
-  const { actualNotes } = notes;
+  const { actualNotes, archivedNotes } = notes;
   // console.log("notes =>", notes);
 
   useEffect(() => {
@@ -26,12 +26,16 @@ export default function Notes() {
   return (
     <>
       <Typography component="h3" variant="h5">
-        Notes
+        {isArchived ? "Archived Notes" : "Notes"}
       </Typography>
       <Box component="div" className={classes.notesBox}>
-        {actualNotes.map((note) => (
-          <NoteCard note={note} key={note.id} />
-        ))}
+        {isArchived
+          ? archivedNotes.map((note) => (
+              <NoteCard isArchived={isArchived} note={note} key={note.id} />
+            ))
+          : actualNotes.map((note) => (
+              <NoteCard isArchived={isArchived} note={note} key={note.id} />
+            ))}
       </Box>
     </>
   );

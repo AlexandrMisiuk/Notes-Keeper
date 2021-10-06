@@ -16,12 +16,12 @@ export default function Main() {
       <Route exact path="/">
         <Box component="main" className={classes.main}>
           <NotesEditor isNewNote={true} />
-          <Notes />
+          <Notes isArchived={false} />
         </Box>
       </Route>
       <Route exact path="/archived-notes">
         <Box component="main" className={classes.main}>
-          <div>archived-notes</div>
+          <Notes isArchived={true} />
         </Box>
       </Route>
     </>
