@@ -12,18 +12,17 @@ export default function Main() {
   const classes = useStyles();
 
   return (
-    <>
+    <Box component="main" className={classes.main}>
       <Route exact path="/">
-        <Box component="main" className={classes.main}>
-          <NotesEditor isNewNote={true} />
-          <Notes isArchived={false} />
-        </Box>
+        <NotesEditor isNewNote={true} />
+        <Notes isArchived={false} />
       </Route>
       <Route exact path="/archived-notes">
-        <Box component="main" className={classes.main}>
-          <Notes isArchived={true} />
-        </Box>
+        <Notes isArchived={true} />
       </Route>
-    </>
+      <Route exact path="/search">
+        <div>search</div>
+      </Route>
+    </Box>
   );
 }
