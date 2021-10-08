@@ -5,6 +5,7 @@ import { Box } from "@material-ui/core";
 
 import Notes from "./components/Notes";
 import NotesEditor from "../NotesEditor";
+import FoundNotes from "./components/FoundNotes/FoundNotes";
 
 import useStyles from "./styles";
 
@@ -21,7 +22,7 @@ export default function Main() {
         <Notes isArchived={true} />
       </Route>
       <Route exact path="/search">
-        <div>search</div>
+        <FoundNotes />
       </Route>
     </Box>
   );

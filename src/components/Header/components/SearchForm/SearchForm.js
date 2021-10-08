@@ -16,8 +16,11 @@ export default function SearchForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const searchRequestURI = encodeURIComponent(searchRequest);
     history.push(`/search?req=${searchRequestURI}`);
+
+    setSearchRequest("");
   };
 
   return (

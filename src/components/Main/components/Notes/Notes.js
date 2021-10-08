@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 
-import NoteCard from "./components/NoteCard";
+import NoteCard from "../../../NoteCard";
 
 import useStyles from "./styles";
 

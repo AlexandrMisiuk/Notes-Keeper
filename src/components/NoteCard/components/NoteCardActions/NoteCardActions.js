@@ -18,7 +18,7 @@ import {
   moveToArchivedNotes,
   removeFromActualNotes,
   removeFromArchivedNotes,
-} from "../../../../../../../../features/notesSlice";
+} from "../../../../features/notesSlice";
 
 import useStyles from "./styles";
 

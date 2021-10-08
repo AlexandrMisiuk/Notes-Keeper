@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import CardMembershipIcon from "@material-ui/icons/CardMembership";
 import { Container } from "@material-ui/core";
 
-import SearchForm from "./SearchForm";
+import SearchForm from "./components/SearchForm";
 
 import useStyles from "./styles";
 
