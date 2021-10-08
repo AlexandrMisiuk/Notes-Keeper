@@ -9,7 +9,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import NoteCardHeader from "./components/NoteCardHeader/NoteCardHeader";
 import NoteCardActions from "./components/NoteCardActions/NoteCardActions";
 import NoteCardContent from "./components/NoteCardContent/NoteCardContent";
-import NotesEditor from "../../../../../NotesEditor";
+import NotesEditor from "../NotesEditor";
 
 import { useStyles, noteBackgroundColor } from "./styles";
 
