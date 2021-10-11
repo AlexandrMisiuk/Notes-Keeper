@@ -8,12 +8,12 @@ import NoteCard from "../../../NoteCard";
 
 import useStyles from "./styles";
 
-const selectActualNotes = (state) => state.notes;
+const selectNotes = (state) => state.notes;
 
 export default function Notes({ isArchived }) {
   const classes = useStyles();
 
-  const notes = useSelector(selectActualNotes);
+  const notes = useSelector(selectNotes);
   const { actualNotes, archivedNotes } = notes;
   // console.log("notes =>", notes);
 
