@@ -9,7 +9,7 @@ import NoteCard from "../../../NoteCard";
 
 import useStyles from "./styles";
 
-const selectActualNotes = (state) => state.notes;
+const selectNotes = (state) => state.notes;
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -20,7 +20,8 @@ export default function FoundNotes() {
 
   const query = useQuery().get("req");
 
-  const notes = useSelector(selectActualNotes);
+  const notes = useSelector(selectNotes);
+
   const { actualNotes, archivedNotes } = notes;
   // console.log("notes =>", notes);
 
@@ -36,22 +37,56 @@ export default function FoundNotes() {
         );
   };
 
-  // console.log("filteredActualNotes", filteredNotes(actualNotes, query));
+  const filteredActualNotes = filteredNotes(actualNotes, query);
+  const filteredArchivedNotes = filteredNotes(archivedNotes, query);
 
-  return (
+  const searchedActualNotes = filteredActualNotes.length ? (
     <>
       <Typography component="h3" variant="h5">
         Search result
       </Typography>
       <Box component="div" className={classes.notesBox}>
-        {filteredNotes(actualNotes, query).map((note) => (
+        {filteredActualNotes.map((note) => (
           <NoteCard isArchived={false} note={note} key={note.id} />
         ))}
-        archived
-        {filteredNotes(archivedNotes, query).map((note) => (
+      </Box>
+    </>
+  ) : null;
+
+  const searchedArchivedNotes = filteredArchivedNotes.length ? (
+    <>
+      <Typography component="h3" variant="h5">
+        Archived notes
+      </Typography>
+      <Box component="div" className={classes.notesBox}>
+        {filteredArchivedNotes.map((note) => (
           <NoteCard isArchived={true} note={note} key={note.id} />
         ))}
       </Box>
+    </>
+  ) : null;
+
+  const searchResult =
+    !searchedActualNotes && !searchedArchivedNotes ? (
+      <Typography component="h3" variant="h5">
+        Search did not return any result!
+      </Typography>
+    ) : (
+      <>
+        {searchedActualNotes}
+        {searchedArchivedNotes}
+      </>
+    );
+
+  return (
+    <>
+      {!query ? (
+        <Typography component="h3" variant="h5" color="error">
+          Bad request! Enter query.
+        </Typography>
+      ) : (
+        searchResult
+      )}
     </>
   );
 }
