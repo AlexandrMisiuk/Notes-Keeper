@@ -24,13 +24,23 @@ import { useStyles, noteBackgroundColor } from "./styles";
 
 export default function NotesEditor(props) {
   const { isNewNote, open, setOpen, note = {} } = props;
-  const { heading = "", text = "", noteColor = "", id = "" } = note;
+  const {
+    heading = "",
+    text = "",
+    noteColor = "",
+    id = "",
+    isTodo = false,
+  } = note;
 
   const dispatch = useDispatch();
 
   const [currentHeading, setCurrentHeading] = useState(heading);
+  // console.log("currentHeading",currentHeading);
   const [currentText, setCurrentText] = useState(text);
+  // console.log("currentText", currentText);
   const [currentNoteColor, setCurrentNoteColor] = useState(noteColor);
+  const [currentIsTodo, setCurrentIsTodo] = useState(isTodo);
+  // console.log("currentIsTodo", currentIsTodo);
   const [isInputError, setIsInputError] = useState(false);
 
   const classes = useStyles();
@@ -52,10 +62,31 @@ export default function NotesEditor(props) {
     setCurrentHeading(heading);
     setCurrentText(text);
     setCurrentNoteColor(noteColor);
+    setCurrentIsTodo(isTodo);
   };
 
   const handleChoseColor = (color) => {
     setCurrentNoteColor(color);
+  };
+
+  //   currentText string
+  // NotesEditor.js:43 currentIsTodo false
+  // NotesEditor.js:40 currentText object
+  const handleChangeToList = () => {
+    if (currentIsTodo) {
+      const todosText = currentText.map((todo) => todo.text);
+      const joinedText = todosText.join("\n");
+      setCurrentText(joinedText);
+      setCurrentIsTodo(!currentIsTodo);
+    } else {
+      const separatedText = currentText.split(/\n/);
+      const todos = separatedText.map((item) => ({
+        text: item,
+        isDone: false,
+      }));
+      setCurrentText(todos);
+      setCurrentIsTodo(!currentIsTodo);
+    }
   };
 
   function handleSafeNote() {
@@ -70,6 +101,7 @@ export default function NotesEditor(props) {
       heading: currentHeading.trim(),
       text: currentText.trim(),
       noteColor: currentNoteColor,
+      isTodo: currentIsTodo,
       lastEdit: new Date().toLocaleString(),
       id: isNewNote ? uuidv4() : id,
     };
@@ -80,6 +112,7 @@ export default function NotesEditor(props) {
       setCurrentHeading("");
       setCurrentText("");
       setCurrentNoteColor("");
+      setCurrentIsTodo(false);
 
       setIsInputError(false);
     } else {
@@ -89,6 +122,7 @@ export default function NotesEditor(props) {
       setCurrentHeading(note.heading);
       setCurrentText(note.text);
       setCurrentNoteColor(note.noteColor);
+      setCurrentIsTodo(note.isTodo);
 
       setOpen(false);
       setIsInputError(false);
@@ -102,6 +136,7 @@ export default function NotesEditor(props) {
       </Typography>
       <Box component="div" className={classes.form}>
         <NotesEditorForm
+          currentIsTodo={currentIsTodo}
           currentHeading={currentHeading}
           setCurrentHeading={setCurrentHeading}
           currentText={currentText}
@@ -115,6 +150,7 @@ export default function NotesEditor(props) {
         <NotesEditorBtnsGroup
           handleSafeNote={handleSafeNote}
           handleChoseColor={handleChoseColor}
+          handleChangeToList={handleChangeToList}
           isNewNote={isNewNote}
         />
       </Box>
@@ -127,6 +163,7 @@ export default function NotesEditor(props) {
         </EditDialogTitle>
         <MuiDialogContent className={classes.dialogForm}>
           <NotesEditorForm
+            currentIsTodo={currentIsTodo}
             currentHeading={currentHeading}
             setCurrentHeading={setCurrentHeading}
             currentText={currentText}
@@ -140,6 +177,7 @@ export default function NotesEditor(props) {
           <NotesEditorBtnsGroup
             handleSafeNote={handleSafeNote}
             handleChoseColor={handleChoseColor}
+            handleChangeToList={handleChangeToList}
             isNewNote={isNewNote}
           />
         </MuiDialogActions>
