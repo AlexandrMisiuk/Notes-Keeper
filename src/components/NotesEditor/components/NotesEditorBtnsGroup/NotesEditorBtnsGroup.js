@@ -1,7 +1,6 @@
 import React from "react";
 
 import Button from "@material-ui/core/Button";
-import AddAlertIcon from "@material-ui/icons/AddAlert";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -13,6 +12,7 @@ import useStyles from "./styles";
 export default function NotesEditorBtnsGroup({
   handleSafeNote,
   handleChoseColor,
+  handleChangeToList,
   isNewNote,
 }) {
   const classes = useStyles();
@@ -21,22 +21,13 @@ export default function NotesEditorBtnsGroup({
 
   return (
     <>
-      <Tooltip title="Add alert">
-        <IconButton aria-label="add-alert">
-          <AddAlertIcon />
-        </IconButton>
-      </Tooltip>
       <Tooltip title="To do list">
-        <IconButton aria-label="to-do-list">
+        <IconButton aria-label="to-do-list" onClick={handleChangeToList}>
           <AssignmentTurnedInIcon />
         </IconButton>
       </Tooltip>
       <ColorBtn handleChoseColor={handleChoseColor} />
-      <Button
-        className={classes.saveChangesBtn}
-        autoFocus
-        onClick={handleSafeNote}
-      >
+      <Button className={classes.saveChangesBtn} onClick={handleSafeNote}>
         {btnText}
       </Button>
     </>
