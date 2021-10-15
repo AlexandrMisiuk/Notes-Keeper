@@ -1,8 +1,8 @@
 import React from "react";
 
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+
+import TodosForm from "./TodosForm/TodosForm";
 
 import useStyles from "./styles";
 
@@ -13,52 +13,12 @@ export default function NotesEditorForm(props) {
     setIsInputError,
     currentHeading,
     setCurrentHeading,
-    currentText,
-    setCurrentText,
+    currentNoteContent,
+    setCurrentNoteContent,
     textFieldId,
   } = props;
 
   const classes = useStyles();
-
-  const todosCheckboxes = currentIsTodo
-    ? currentText.map((todo, index) => {
-        return (
-          <FormControlLabel
-            classes={{
-              label: classes.formControlLabel,
-            }}
-            className={classes.todo}
-            control={
-              <Checkbox
-                checked={todo.isDone}
-                onChange={() => {
-                  const newTodos = [...currentText];
-                  newTodos[index].isDone = !todo.isDone;
-                  setCurrentText(newTodos);
-                }}
-                name={"checkedTodo" + index}
-                color="primary"
-              />
-            }
-            label={
-              <TextField
-                className={classes.todoTextField}
-                id={`todo-text${index}`}
-                placeholder="Enter todo"
-                value={todo.text}
-                onChange={(event) => {
-                  const newTodos = [...currentText];
-                  newTodos[index].text = event.target.value;
-                  setCurrentText(newTodos);
-                }}
-                multiline
-              />
-            }
-            key={index + 1}
-          />
-        );
-      })
-    : null;
 
   return (
     <>
@@ -77,7 +37,10 @@ export default function NotesEditorForm(props) {
         onBlur={() => setIsInputError(false)}
       />
       {currentIsTodo ? (
-        todosCheckboxes
+        <TodosForm
+          currentNoteContent={currentNoteContent}
+          setCurrentNoteContent={setCurrentNoteContent}
+        />
       ) : (
         <TextField
           className={classes.textField}
@@ -85,9 +48,9 @@ export default function NotesEditorForm(props) {
           label="Note"
           placeholder="Note..."
           multiline
-          value={currentText}
+          value={currentNoteContent}
           onChange={(e) => {
-            setCurrentText(e.target.value);
+            setCurrentNoteContent(e.target.value);
           }}
         />
       )}
