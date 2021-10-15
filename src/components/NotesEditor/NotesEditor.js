@@ -36,8 +36,8 @@ export default function NotesEditor(props) {
 
   const [currentHeading, setCurrentHeading] = useState(heading);
   // console.log("currentHeading",currentHeading);
-  const [currentText, setCurrentText] = useState(text);
-  // console.log("currentText", currentText);
+  const [currentNoteContent, setCurrentNoteContent] = useState(text);
+  // console.log("currentNoteContent", currentNoteContent);
   const [currentNoteColor, setCurrentNoteColor] = useState(noteColor);
   const [currentIsTodo, setCurrentIsTodo] = useState(isTodo);
   // console.log("currentIsTodo", currentIsTodo);
@@ -60,7 +60,7 @@ export default function NotesEditor(props) {
   const handleClose = () => {
     setOpen(false);
     setCurrentHeading(heading);
-    setCurrentText(text);
+    setCurrentNoteContent(text);
     setCurrentNoteColor(noteColor);
     setCurrentIsTodo(isTodo);
   };
@@ -69,22 +69,22 @@ export default function NotesEditor(props) {
     setCurrentNoteColor(color);
   };
 
-  //   currentText string
+  //   currentNoteContent string
   // NotesEditor.js:43 currentIsTodo false
-  // NotesEditor.js:40 currentText object
+  // NotesEditor.js:40 currentNoteContent object
   const handleChangeToList = () => {
     if (currentIsTodo) {
-      const todosText = currentText.map((todo) => todo.text);
-      const joinedText = todosText.join("\n");
-      setCurrentText(joinedText);
+      const todosText = currentNoteContent.map((todo) => todo.text);
+      const joinedText = todosText.join("\n").trim();
+      setCurrentNoteContent(joinedText);
       setCurrentIsTodo(!currentIsTodo);
     } else {
-      const separatedText = currentText.split(/\n/);
+      const separatedText = currentNoteContent.split(/\n/);
       const todos = separatedText.map((item) => ({
         text: item,
         isDone: false,
       }));
-      setCurrentText(todos);
+      setCurrentNoteContent(todos);
       setCurrentIsTodo(!currentIsTodo);
     }
   };
@@ -99,7 +99,7 @@ export default function NotesEditor(props) {
 
     const note = {
       heading: currentHeading.trim(),
-      text: currentText.trim(),
+      text: currentNoteContent.trim(),
       noteColor: currentNoteColor,
       isTodo: currentIsTodo,
       lastEdit: new Date().toLocaleString(),
@@ -110,7 +110,7 @@ export default function NotesEditor(props) {
       dispatch(addNote(note));
 
       setCurrentHeading("");
-      setCurrentText("");
+      setCurrentNoteContent("");
       setCurrentNoteColor("");
       setCurrentIsTodo(false);
 
@@ -120,7 +120,7 @@ export default function NotesEditor(props) {
       dispatch(addNote(note));
 
       setCurrentHeading(note.heading);
-      setCurrentText(note.text);
+      setCurrentNoteContent(note.text);
       setCurrentNoteColor(note.noteColor);
       setCurrentIsTodo(note.isTodo);
 
@@ -139,8 +139,8 @@ export default function NotesEditor(props) {
           currentIsTodo={currentIsTodo}
           currentHeading={currentHeading}
           setCurrentHeading={setCurrentHeading}
-          currentText={currentText}
-          setCurrentText={setCurrentText}
+          currentNoteContent={currentNoteContent}
+          setCurrentNoteContent={setCurrentNoteContent}
           isInputError={isInputError}
           setIsInputError={setIsInputError}
           textFieldId="new"
@@ -166,8 +166,8 @@ export default function NotesEditor(props) {
             currentIsTodo={currentIsTodo}
             currentHeading={currentHeading}
             setCurrentHeading={setCurrentHeading}
-            currentText={currentText}
-            setCurrentText={setCurrentText}
+            currentNoteContent={currentNoteContent}
+            setCurrentNoteContent={setCurrentNoteContent}
             isInputError={isInputError}
             setIsInputError={setIsInputError}
             textFieldId="edit"
