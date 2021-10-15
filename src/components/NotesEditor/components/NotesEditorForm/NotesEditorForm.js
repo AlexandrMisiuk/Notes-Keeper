@@ -2,7 +2,7 @@ import React from "react";
 
 import TextField from "@material-ui/core/TextField";
 
-import TodosForm from "./TodosForm/TodosForm";
+import TodosForm from "./components/TodosForm";
 
 import useStyles from "./styles";
 
