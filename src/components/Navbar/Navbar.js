@@ -47,7 +47,7 @@ export default function Navbar() {
         value="actual"
         aria-label="actual"
         className={classes.button}
-        onClick={() => history.push("/")}
+        onClick={() => history.push("/Notes-Keeper/")}
       >
         <CardMembershipIcon />
         {isTablet && (
@@ -64,7 +64,7 @@ export default function Navbar() {
       <ToggleButton
         value="archive"
         aria-label="archive"
-        onClick={() => history.push("/archived-notes")}
+        onClick={() => history.push("/Notes-Keeper/archived-notes")}
       >
         <ArchiveIcon />
         {isTablet && (
