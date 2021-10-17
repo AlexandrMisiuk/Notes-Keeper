@@ -12,13 +12,14 @@ export default function SearchForm() {
   const [searchRequest, setSearchRequest] = React.useState("");
 
   const history = useHistory();
+
   // console.log(history);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const searchRequestURI = encodeURIComponent(searchRequest);
-    history.push(`/search?req=${searchRequestURI}`);
+    history.push(`/Notes-Keeper/search?req=${searchRequestURI}`);
 
     setSearchRequest("");
   };

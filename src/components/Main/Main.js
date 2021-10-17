@@ -14,14 +14,14 @@ export default function Main() {
 
   return (
     <Box component="main" className={classes.main}>
-      <Route exact path="/">
+      <Route exact path="/Notes-Keeper/">
         <NotesEditor isNewNote={true} />
         <Notes isArchived={false} />
       </Route>
-      <Route exact path="/archived-notes">
+      <Route exact path="/Notes-Keeper/archived-notes">
         <Notes isArchived={true} />
       </Route>
-      <Route exact path="/search">
+      <Route exact path="/Notes-Keeper/search">
         <FoundNotes />
       </Route>
     </Box>
