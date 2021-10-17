@@ -30,11 +30,24 @@ export default function FoundNotes() {
 
     return !query
       ? []
-      : notes.filter(
-          (note) =>
-            note.heading.search(queryRegExp) !== -1 ||
-            note.text.search(queryRegExp) !== -1
-        );
+      : notes.filter((note) => {
+          const heading = note.heading;
+          const content = note.content;
+
+          if (typeof content === "string")
+            return (
+              heading.search(queryRegExp) !== -1 ||
+              content.search(queryRegExp) !== -1
+            );
+
+          const todosText = content.map((todo) => todo.text);
+          const joinedText = todosText.join("\n");
+          if (typeof content === "object")
+            return (
+              heading.search(queryRegExp) !== -1 ||
+              joinedText.search(queryRegExp) !== -1
+            );
+        });
   };
 
   const filteredActualNotes = filteredNotes(actualNotes, query);
