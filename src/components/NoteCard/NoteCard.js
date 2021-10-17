@@ -15,7 +15,7 @@ import { useStyles, noteBackgroundColor } from "./styles";
 
 export default function NoteCard({ note, isArchived }) {
   // console.log("isArchived", isArchived);
-  const { text, noteColor } = note;
+  const { content, noteColor, isTodo } = note;
 
   const [openEditModal, setOpenEditModal] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -42,7 +42,11 @@ export default function NoteCard({ note, isArchived }) {
           note={note}
           setOpenEditModal={setOpenEditModal}
         />
-        <NoteCardContent expanded={expanded} text={text} />
+        <NoteCardContent
+          expanded={expanded}
+          content={content}
+          isTodo={isTodo}
+        />
       </Card>
       <NotesEditor
         note={note}

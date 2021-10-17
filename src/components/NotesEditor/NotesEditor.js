@@ -26,7 +26,7 @@ export default function NotesEditor(props) {
   const { isNewNote, open, setOpen, note = {} } = props;
   const {
     heading = "",
-    text = "",
+    content = "",
     noteColor = "",
     id = "",
     isTodo = false,
@@ -36,8 +36,8 @@ export default function NotesEditor(props) {
 
   const [currentHeading, setCurrentHeading] = useState(heading);
   // console.log("currentHeading",currentHeading);
-  const [currentNoteContent, setCurrentNoteContent] = useState(text);
-  // console.log("currentNoteContent", currentNoteContent);
+  const [currentNoteContent, setCurrentNoteContent] = useState(content);
+  // console.log("currentNoteContent", currentNoteContent)
   const [currentNoteColor, setCurrentNoteColor] = useState(noteColor);
   const [currentIsTodo, setCurrentIsTodo] = useState(isTodo);
   // console.log("currentIsTodo", currentIsTodo);
@@ -60,7 +60,7 @@ export default function NotesEditor(props) {
   const handleClose = () => {
     setOpen(false);
     setCurrentHeading(heading);
-    setCurrentNoteContent(text);
+    setCurrentNoteContent(content);
     setCurrentNoteColor(noteColor);
     setCurrentIsTodo(isTodo);
   };
@@ -69,14 +69,11 @@ export default function NotesEditor(props) {
     setCurrentNoteColor(color);
   };
 
-  //   currentNoteContent string
-  // NotesEditor.js:43 currentIsTodo false
-  // NotesEditor.js:40 currentNoteContent object
   const handleChangeToList = () => {
     if (currentIsTodo) {
       const todosText = currentNoteContent.map((todo) => todo.text);
       const joinedText = todosText.join("\n").trim();
-      setCurrentNoteContent(joinedText);
+      setCurrentNoteContent(joinedText.trim());
       setCurrentIsTodo(!currentIsTodo);
     } else {
       const separatedText = currentNoteContent.split(/\n/);
@@ -99,7 +96,7 @@ export default function NotesEditor(props) {
 
     const note = {
       heading: currentHeading.trim(),
-      text: currentNoteContent.trim(),
+      content: currentNoteContent,
       noteColor: currentNoteColor,
       isTodo: currentIsTodo,
       lastEdit: new Date().toLocaleString(),
@@ -120,7 +117,7 @@ export default function NotesEditor(props) {
       dispatch(addNote(note));
 
       setCurrentHeading(note.heading);
-      setCurrentNoteContent(note.text);
+      setCurrentNoteContent(note.content);
       setCurrentNoteColor(note.noteColor);
       setCurrentIsTodo(note.isTodo);
 

@@ -42,9 +42,10 @@ export default function TodosForm({
     setCurrentNoteContent(filteredTodos);
   };
 
-  const handleChangeTodo = (index, event) => {
+  const handleChangeTodo = (todo, index, event) => {
+    const newTodo = { ...todo, text: event.target.value };
     const newTodos = [...currentNoteContent];
-    newTodos[index].text = event.target.value;
+    newTodos[index] = newTodo;
     setCurrentNoteContent(newTodos);
   };
 
@@ -84,7 +85,7 @@ export default function TodosForm({
                 placeholder="Enter todo"
                 value={todo.text}
                 disabled={todo.isDone}
-                onChange={(event) => handleChangeTodo(index, event)}
+                onChange={(event) => handleChangeTodo(todo, index, event)}
                 multiline
               />
               <IconButton
