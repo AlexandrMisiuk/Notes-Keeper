@@ -1,7 +1,8 @@
 # Description
 
 Notes keeper app.
-You can try the application on my github-pages.
+
+# You can try the application on my github-pages [here](https://alexandrmisiuk.github.io/Notes-Keeper/)
 
 ## Application created with:
 
